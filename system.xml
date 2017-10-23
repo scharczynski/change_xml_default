@@ -1,0 +1,552 @@
+<ns0:system xmlns:ns0="http://www.ptcusa.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="pyramid" xsi:schemaLocation="http://www.ptcusa.com A510.xsd">
+	<ns0:hosts>
+		
+		
+		<ns0:host ip="192.168.100.131" localhost="true" name="mk5client" />
+	</ns0:hosts>
+	<ns0:loopcontrollers />
+	<ns0:interpreter>
+		<ns0:devices>
+			<ns0:epicscas monitorOnlyChange="true" name="epics_server" type="epicscas" />
+			<ns0:memblock name="mk5_status" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="r_mk5_heartbeat" wire="int_in_1" />
+					<ns0:channel name="r_mk5_version" wire="int_in_2" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:mk5tempcontrol analogChannel="c_dac_ana9" digitalChannel="c_temp_enable" name="tempcontrol" type="mk5tempcontrol">
+				<ns0:channels>
+					<ns0:channel name="c_tempcontrol_setpoint" wire="int_out_setpoint" />
+					<ns0:channel name="c_tempcontrol_setpoint_analog" wire="analog_out_setpoint" />
+				</ns0:channels>
+			</ns0:mk5tempcontrol>
+			<ns0:pidcontrol Kd="0" Ki="1.5" Kp="1500" name="temppid" outputChannel="c_tempcontrol_setpoint_analog" outputMax="1000" outputMin="0" period="1000" pvChannel="r_adc1_ain7" type="pidcontrol">
+				<ns0:channels>
+					<ns0:channel name="c_temppid_setpoint" wire="analog_out_setpoint" />
+					<ns0:channel name="c_temppid_kp" wire="analog_out_kp" />
+					<ns0:channel name="c_temppid_ki" wire="analog_out_ki" />
+					<ns0:channel name="c_temppid_kd" wire="analog_out_kd" />
+				</ns0:channels>
+			</ns0:pidcontrol>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="ADC_CONVST" pin="P9_30" toggle="true" type="bbbgpio">
+				<ns0:channels />
+			</ns0:bbbgpio>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="PROTO_DOUT1" pin="P8_7" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="c_proto_dout1" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="PROTO_DOUT2" pin="P8_8" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="c_proto_dout2" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="PROTO_DOUT3" pin="P8_9" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="c_proto_dout3" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="PROTO_DOUT4" pin="P8_10" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="c_proto_dout4" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="PROTO_DIN1" pin="P8_34" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_proto_din1" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="PROTO_DIN2" pin="P8_36" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_proto_din2" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="PROTO_DIN3" pin="P8_37" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_proto_din3" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="PROTO_DIN4" pin="P8_38" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_proto_din4" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="ADC_BUSY" pin="P9_16" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_adc_busy" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="ADC_RESET" pin="P9_23" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="c_adc_reset" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="MC_BUSY_1" pin="P9_11" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_mc_busy_1" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="MC_BUSY_2" pin="P9_12" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_mc_busy_2" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="MC_BUSY_3" pin="P9_13" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_mc_busy_3" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="MC_BUSY_4" pin="P9_14" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_mc_busy_4" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="LOAD_SW" pin="P8_13" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_load_sw" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="JOGIN_SW" pin="P8_14" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_jogin_sw" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio direction="input" name="JOGOUT_SW" pin="P8_17" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="r_jogout_sw" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="TEMP_ENABLE" pin="P8_18" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="c_temp_enable" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:bbbgpio defaultValue="false" direction="output" name="TEMP_MODE" pin="P8_19" type="bbbgpio">
+				<ns0:channels>
+					<ns0:channel name="c_temp_mode" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:bbbgpio>
+			<ns0:prudac8555 ledSafety1="c_led_safety_1" ledSafety2="c_led_safety_2" name="prudac85551" pru0DataFile="//opt/ht/mk5/bin/pru0data.bin" pru0InstructionFile="/opt/ht/mk5/bin/pru0app.bin" pru1DataFile="//opt/ht/mk5/bin/pru1data.bin" pru1InstructionFile="/opt/ht/mk5/bin/pru1app.bin" type="prudac8555">
+				<ns0:illumparams>
+					<ns0:triggerSource name="triggerSource" value="0" />
+					<ns0:externalTriggerPolarity name="externalTriggerPolarity" value="1" />
+					<ns0:internalTriggerPolarity name="internalTriggerPolarity" value="1" />
+					<ns0:internalTriggerFrequency name="internalTriggerFrequency" value="25" />
+					<ns0:internalTriggerPulseLength name="internalTriggerPulseLength" value="5000" />
+					<ns0:illumchannels>
+						<ns0:led1 intensityMax=".2" intensityMin="0" name="illum1Params" pulseStartTime="0" pulseTime="10000" />
+						<ns0:led2 intensityMax=".2" intensityMin="0" name="illum2Params" pulseStartTime="0" pulseTime="10000" />
+						<ns0:led3 intensityMax=".2" intensityMin="0" name="illum3Params" pulseStartTime="0" pulseTime="10000" />
+						<ns0:led4 intensityMax=".2" intensityMin="0" name="illum4Params" pulseStartTime="0" pulseTime="10000" />
+						<ns0:xen1 intensityMax="10" intensityMin="-10" name="illum5Params" pulseStartTime="0" pulseTime="1000" />
+						<ns0:xen2 intensityMax="10" intensityMin="-10" name="illum6Params" pulseStartTime="0" pulseTime="1000" />
+						<ns0:xen3 intensityMax="10" intensityMin="-10" name="illum7Params" pulseStartTime="0" pulseTime="1000" />
+						<ns0:xen4 intensityMax="10" intensityMin="-10" name="illum8Params" pulseStartTime="0" pulseTime="1000" />
+					</ns0:illumchannels>
+				</ns0:illumparams>
+				<ns0:channels>
+					<ns0:channel name="c_dac8555_msg" wire="int_out_message" />
+					<ns0:channel name="c_dac_ana1" scaleB="0.192563" scaleC="-0.481408" wire="analog_out_1" />
+					<ns0:channel name="c_dac_ana2" scaleB="0.379429" scaleC="-0.947146" wire="analog_out_2" />
+					<ns0:channel name="c_dac_ana3" scaleB="0.379429" scaleC="-0.947146" wire="analog_out_3" />
+					<ns0:channel name="c_dac_ana4" scaleB="0.379429" scaleC="-0.947146" wire="analog_out_4" />
+					<ns0:channel limitHigh="10" limitLow="-10" name="c_dac_ana5" scaleB="4" scaleC="-10" wire="analog_out_5" />
+					<ns0:channel limitHigh="10" limitLow="-10" name="c_dac_ana6" scaleB="4" scaleC="-10" wire="analog_out_6" />
+					<ns0:channel limitHigh="10" limitLow="-10" name="c_dac_ana7" scaleB="4" scaleC="-10" wire="analog_out_7" />
+					<ns0:channel limitHigh="10" limitLow="-10" name="c_dac_ana8" scaleB="4" scaleC="-10" wire="analog_out_8" />
+					<ns0:channel limitHigh="5" limitLow="0" name="c_dac_ana9" scaleB="1" scaleC="0" wire="analog_out_9" />
+					<ns0:channel limitHigh="5" limitLow="0" name="c_dac_ana10" scaleB="1" scaleC="0" wire="analog_out_10" />
+					<ns0:channel limitHigh="5" limitLow="0" name="c_dac_ana11" scaleB="1" scaleC="0" wire="analog_out_11" />
+					<ns0:channel limitHigh="5" limitLow="0" name="c_dac_ana12" scaleB="1" scaleC="0" wire="analog_out_12" />
+					<ns0:channel name="c_led_pulse_1" wire="digital_out_1" />
+					<ns0:channel name="c_led_pulse_2" wire="digital_out_2" />
+					<ns0:channel name="c_led_pulse_3" wire="digital_out_3" />
+					<ns0:channel name="c_led_pulse_4" wire="digital_out_4" />
+					<ns0:channel name="c_xenon_pulse_1" wire="digital_out_6" />
+					<ns0:channel name="c_xenon_pulse_2" wire="digital_out_7" />
+					<ns0:channel name="c_xenon_pulse_3" wire="digital_out_8" />
+					<ns0:channel name="c_xenon_pulse_4" wire="digital_out_9" />
+					<ns0:channel name="c_pulse_all" wire="digital_out_all" />
+					<ns0:channel name="c_trigger" wire="digital_out_5" />
+					<ns0:channel name="r_trigger" wire="digital_in_1" />
+					<ns0:channel name="c_led1_enabled" wire="digital_out_illum_auto_enabled_1" />
+					<ns0:channel name="c_led2_enabled" wire="digital_out_illum_auto_enabled_2" />
+					<ns0:channel name="c_led3_enabled" wire="digital_out_illum_auto_enabled_3" />
+					<ns0:channel name="c_led4_enabled" wire="digital_out_illum_auto_enabled_4" />
+					<ns0:channel name="c_xen1_enabled" wire="digital_out_illum_auto_enabled_5" />
+					<ns0:channel name="c_xen2_enabled" wire="digital_out_illum_auto_enabled_6" />
+					<ns0:channel name="c_xen3_enabled" wire="digital_out_illum_auto_enabled_7" />
+					<ns0:channel name="c_xen4_enabled" wire="digital_out_illum_auto_enabled_8" />
+					<ns0:channel name="c_all_illum_enabled" wire="digital_out_illum_auto_enabled_all" />
+					<ns0:channel name="c_illum_trig_src" wire="int_out_illum_trig_src" />
+					<ns0:channel name="c_illum_ext_trig_pol" wire="int_out_illum_ext_trig_pol" />
+					<ns0:channel name="c_illum_intnl_trig_pol" wire="int_out_illum_intnl_trig_pol" />
+					<ns0:channel name="c_illum_intnl_trig_freq" wire="analog_out_illum_intnl_trig_freq" />
+					<ns0:channel name="c_illum_intnl_trig_pulselen" wire="int_out_illum_intnl_trig_pulselen" />
+					<ns0:channel name="c_led1_inten_max" wire="analog_in_illum_inten_max_1" />
+					<ns0:channel name="c_led1_inten_min" wire="analog_in_illum_inten_min_1" />
+					<ns0:channel name="c_led1_pulsestart_time" wire="int_out_illum_pulsestart_time_1" />
+					<ns0:channel name="c_led1_pulse_time" wire="int_out_illum_pulse_time_1" />
+					<ns0:channel name="c_led2_inten_max" wire="analog_in_illum_inten_max_2" />
+					<ns0:channel name="c_led2_inten_min" wire="analog_in_illum_inten_min_2" />
+					<ns0:channel name="c_led2_pulsestart_time" wire="int_out_illum_pulsestart_time_2" />
+					<ns0:channel name="c_led2_pulse_time" wire="int_out_illum_pulse_time_2" />
+					<ns0:channel name="c_led3_inten_max" wire="analog_in_illum_inten_max_3" />
+					<ns0:channel name="c_led3_inten_min" wire="analog_in_illum_inten_min_3" />
+					<ns0:channel name="c_led3_pulsestart_time" wire="int_out_illum_pulsestart_time_3" />
+					<ns0:channel name="c_led3_pulse_time" wire="int_out_illum_pulse_time_3" />
+					<ns0:channel name="c_led4_inten_max" wire="analog_in_illum_inten_max_4" />
+					<ns0:channel name="c_led4_inten_min" wire="analog_in_illum_inten_min_4" />
+					<ns0:channel name="c_led4_pulsestart_time" wire="int_out_illum_pulsestart_time_4" />
+					<ns0:channel name="c_led4_pulse_time" wire="int_out_illum_pulse_time_4" />
+					<ns0:channel name="c_xen1_inten_max" wire="analog_in_illum_inten_max_5" />
+					<ns0:channel name="c_xen1_inten_min" wire="analog_in_illum_inten_min_5" />
+					<ns0:channel name="c_xen1_pulsestart_time" wire="int_out_illum_pulsestart_time_5" />
+					<ns0:channel name="c_xen1_pulse_time" wire="int_out_illum_pulse_time_5" />
+					<ns0:channel name="c_xen2_inten_max" wire="analog_in_illum_inten_max_6" />
+					<ns0:channel name="c_xen2_inten_min" wire="analog_in_illum_inten_min_6" />
+					<ns0:channel name="c_xen2_pulsestart_time" wire="int_out_illum_pulsestart_time_6" />
+					<ns0:channel name="c_xen2_pulse_time" wire="int_out_illum_pulse_time_6" />
+					<ns0:channel name="c_xen3_inten_max" wire="analog_in_illum_inten_max_7" />
+					<ns0:channel name="c_xen3_inten_min" wire="analog_in_illum_inten_min_7" />
+					<ns0:channel name="c_xen3_pulsestart_time" wire="int_out_illum_pulsestart_time_7" />
+					<ns0:channel name="c_xen3_pulse_time" wire="int_out_illum_pulse_time_7" />
+					<ns0:channel name="c_xen4_inten_max" wire="analog_in_illum_inten_max_8" />
+					<ns0:channel name="c_xen4_inten_min" wire="analog_in_illum_inten_min_8" />
+					<ns0:channel name="c_xen4_pulsestart_time" wire="int_out_illum_pulsestart_time_8" />
+					<ns0:channel name="c_xen4_pulse_time" wire="int_out_illum_pulse_time_8" />
+					<ns0:channel name="r_illum_state" wire="int_in_illum_state" />
+					<ns0:channel name="r_illum_enabled_state" wire="int_in_illum_enabled_state" />
+					<ns0:channel name="r_illum_led1_state" wire="int_in_illum_chn_state_1" />
+					<ns0:channel name="r_illum_led2_state" wire="int_in_illum_chn_state_2" />
+					<ns0:channel name="r_illum_led3_state" wire="int_in_illum_chn_state_3" />
+					<ns0:channel name="r_illum_led4_state" wire="int_in_illum_chn_state_4" />
+					<ns0:channel name="r_illum_xen1_state" wire="int_in_illum_chn_state_5" />
+					<ns0:channel name="r_illum_xen2_state" wire="int_in_illum_chn_state_6" />
+					<ns0:channel name="r_illum_xen3_state" wire="int_in_illum_chn_state_7" />
+					<ns0:channel name="r_illum_xen4_state" wire="int_in_illum_chn_state_8" />
+					<ns0:channel name="r_pru0_heartbeat" wire="int_in_pru0_heartbeat" />
+					<ns0:channel name="r_pru1_heartbeat" wire="int_in_pru1_heartbeat" />
+					<ns0:channel name="c_initialize_dacs" wire="digital_out_initialize_dacs" />
+					<ns0:channel name="r_encoder" wire="int_in_encoder" />
+				</ns0:channels>
+			</ns0:prudac8555>
+			<ns0:ads8568 device="/dev/spidev2.0" name="adc1" pollingPeriod="50" rstChannel="c_adc_reset" speed="1000000" type="ads8568">
+				<ns0:channels>
+					<ns0:channel name="c_adc1_xfer" wire="int_out_xfer" />
+					<ns0:channel name="r_adc1_xfer" wire="int_in_xfer" />
+					<ns0:channel name="r_adc1_ain1" wire="analog_in_1" />
+					<ns0:channel name="r_adc1_ain2" wire="analog_in_2" />
+					<ns0:channel name="r_adc1_ain3" wire="analog_in_3" />
+					<ns0:channel name="r_adc1_ain4" wire="analog_in_4" />
+					<ns0:channel name="r_adc1_ain5" wire="analog_in_5" />
+					<ns0:channel name="r_adc1_ain6" wire="analog_in_6" />
+					<ns0:channel name="r_adc1_ain7" scaleB="100" wire="analog_in_7" />
+					<ns0:channel name="r_adc1_ain8" wire="analog_in_8" />
+				</ns0:channels>
+			</ns0:ads8568>
+			<ns0:pcf8574bus device="/dev/i2c-2" name="pcf8574bus1" pollingPeriod="500" powerOn="r_ac_power_on" type="pcf8574bus">
+				<ns0:channels />
+				<ns0:pcf8574s>
+					<ns0:pcf8574 address="32" defaultValue="255" name="pcf8574_1" type="pcf8574">
+						<ns0:channels>
+							<ns0:channel name="r_lim_sw1" wire="digital_in_1" />
+							<ns0:channel name="r_lim_sw2" wire="digital_in_2" />
+							<ns0:channel name="r_lim_sw3" wire="digital_in_3" />
+							<ns0:channel name="r_lim_sw4" wire="digital_in_4" />
+							<ns0:channel name="r_lim_sw5" wire="digital_in_5" />
+							<ns0:channel name="r_lim_sw6" wire="digital_in_6" />
+							<ns0:channel name="r_lim_sw7" wire="digital_in_7" />
+							<ns0:channel name="r_lim_sw8" wire="digital_in_8" />
+						</ns0:channels>
+					</ns0:pcf8574>
+					<ns0:pcf8574 address="35" defaultValue="255" name="pcf8574_2" type="pcf8574">
+						<ns0:channels>
+							<ns0:channel name="r_mc_flag_1" wire="digital_in_1" />
+							<ns0:channel name="r_mc_flag_2" wire="digital_in_2" />
+							<ns0:channel name="r_mc_flag_3" wire="digital_in_3" />
+							<ns0:channel name="r_mc_flag_4" wire="digital_in_4" />
+							<ns0:channel name="c_dac2_reset" wire="digital_out_6" />
+							<ns0:channel name="c_xen_dac_reset" wire="digital_out_7" />
+							<ns0:channel name="c_led_dac_reset" wire="digital_out_8" />
+						</ns0:channels>
+					</ns0:pcf8574>
+					<ns0:pcf8574 address="33" defaultValue="255" name="pcf8574_3" type="pcf8574">
+						<ns0:channels>
+							<ns0:channel name="c_led_safety_1" wire="digital_out_1" />
+							<ns0:channel name="c_led_safety_2" wire="digital_out_2" />
+							<ns0:channel name="c_led_reset_detect" wire="digital_out_7" />
+							<ns0:channel name="r_led_reset_hap" wire="digital_in_8" />
+						</ns0:channels>
+					</ns0:pcf8574>
+				</ns0:pcf8574s>
+			</ns0:pcf8574bus>
+			<ns0:dspinchain device="/dev/spidev1.0" name="dspinchain1" pollingPeriod="200" speed="1000000" type="dspinchain">
+				<ns0:channels>
+					<ns0:channel name="c_dspin_xfer" wire="int_out_xfer" />
+					<ns0:channel name="r_dspin_xfer" wire="int_in_xfer" />
+					<ns0:channel name="c_initialize_dspins" wire="digital_out_initialize" />
+				</ns0:channels>
+				<ns0:dspins>
+					<ns0:dspin accelDecel="20000" fsSpd="603" kvalAccel="0.5" kvalDecel="0.5" kvalHold="0.115" kvalRun="0.5" maxSpeed="1000" minSpeed="102" name="dspin_1" ocdTh="1" type="dspin">
+						<ns0:channels>
+							<ns0:channel name="c_dspin_xfer_1" wire="int_out_xfer" />
+							<ns0:channel name="r_dspin_xfer_1" wire="int_in_xfer" />
+							<ns0:channel name="r_dspin_status_1" wire="int_in_status" />
+							<ns0:channel name="c_dspin_position_1" wire="int_out_position" />
+							<ns0:channel name="r_dspin_position_1" wire="int_in_position" />
+							<ns0:channel name="r_dspin_mot_status_1" wire="int_in_motion_status" />
+							<ns0:channel name="r_dspin_motion_dir_1" wire="digital_in_motion_direction" />
+							<ns0:channel name="r_dspin_switch_event_1" wire="digital_in_switch_event" />
+							<ns0:channel name="r_dspin_switch_flag_1" wire="digital_in_switch_flag" />
+							<ns0:channel name="r_dspin_busy_1" wire="digital_in_busy" />
+							<ns0:channel name="r_dspin_moving_1" wire="digital_in_moving" />
+							<ns0:channel name="c_dspin_run_1" wire="int_out_run" />
+							<ns0:channel name="c_dspin_hard_stop_1" wire="digital_out_hard_stop" />
+							<ns0:channel name="c_dspin_soft_stop_1" wire="digital_out_soft_stop" />
+							<ns0:channel name="c_dspin_reset_pos_1" wire="digital_out_reset_position" />
+							<ns0:channel name="c_dspin_home_1" wire="digital_out_home" />
+							<ns0:channel name="c_dspin_max_speed_1" wire="int_out_max_speed" />
+							<ns0:channel name="c_dspin_min_speed_1" wire="int_out_min_speed" />
+							<ns0:channel name="c_dspin_accel_1" wire="int_out_acceleration" />
+							<ns0:channel name="c_dspin_kval_hold_1" wire="analog_out_kval_hold" />
+							<ns0:channel name="c_dspin_kval_run_1" wire="analog_out_kval_run" />
+							<ns0:channel name="c_dspin_kval_accel_1" wire="analog_out_kval_accel" />
+							<ns0:channel name="c_dspin_kval_decel_1" wire="analog_out_kval_decel" />
+							<ns0:channel name="c_dspin_ocdth_1" wire="int_out_ocdth" />
+							<ns0:channel name="c_dspin_fsspd_1" wire="int_out_fsspd" />
+						</ns0:channels>
+					</ns0:dspin>
+					<ns0:dspin accelDecel="20000" fsSpd="603" kvalAccel="0.5" kvalDecel="0.5" kvalHold="0.115" kvalRun="0.5" maxSpeed="1000" minSpeed="100" name="dspin_2" ocdTh="1" type="dspin">
+						<ns0:channels>
+							<ns0:channel name="c_dspin_xfer_2" wire="int_out_xfer" />
+							<ns0:channel name="r_dspin_xfer_2" wire="int_in_xfer" />
+							<ns0:channel name="r_dspin_status_2" wire="int_in_status" />
+							<ns0:channel name="c_dspin_position_2" wire="int_out_position" />
+							<ns0:channel name="r_dspin_position_2" wire="int_in_position" />
+							<ns0:channel name="r_dspin_mot_status_2" wire="int_in_motion_status" />
+							<ns0:channel name="r_dspin_motion_dir_2" wire="digital_in_motion_direction" />
+							<ns0:channel name="r_dspin_switch_event_2" wire="digital_in_switch_event" />
+							<ns0:channel name="r_dspin_switch_flag_2" wire="digital_in_switch_flag" />
+							<ns0:channel name="r_dspin_busy_2" wire="digital_in_busy" />
+							<ns0:channel name="r_dspin_moving_2" wire="digital_in_moving" />
+							<ns0:channel name="c_dspin_run_2" wire="int_out_run" />
+							<ns0:channel name="c_dspin_hard_stop_2" wire="digital_out_hard_stop" />
+							<ns0:channel name="c_dspin_soft_stop_2" wire="digital_out_soft_stop" />
+							<ns0:channel name="c_dspin_reset_pos_2" wire="digital_out_reset_position" />
+							<ns0:channel name="c_dspin_home_2" wire="digital_out_home" />
+							<ns0:channel name="c_dspin_max_speed_2" wire="int_out_max_speed" />
+							<ns0:channel name="c_dspin_min_speed_2" wire="int_out_min_speed" />
+							<ns0:channel name="c_dspin_accel_2" wire="int_out_acceleration" />
+							<ns0:channel name="c_dspin_kval_hold_2" wire="analog_out_kval_hold" />
+							<ns0:channel name="c_dspin_kval_run_2" wire="analog_out_kval_run" />
+							<ns0:channel name="c_dspin_kval_accel_2" wire="analog_out_kval_accel" />
+							<ns0:channel name="c_dspin_kval_decel_2" wire="analog_out_kval_decel" />
+							<ns0:channel name="c_dspin_ocdth_2" wire="int_out_ocdth" />
+							<ns0:channel name="c_dspin_fsspd_2" wire="int_out_fsspd" />
+						</ns0:channels>
+					</ns0:dspin>
+					<ns0:dspin accelDecel="2008" fsSpd="603" kvalAccel="0.115" kvalDecel="0.115" kvalHold="0.115" kvalRun="0.115" maxSpeed="200" minSpeed="101" name="dspin_3" ocdTh="8" type="dspin">
+						<ns0:channels>
+							<ns0:channel name="c_dspin_xfer_3" wire="int_out_xfer" />
+							<ns0:channel name="r_dspin_xfer_3" wire="int_in_xfer" />
+							<ns0:channel name="r_dspin_status_3" wire="int_in_status" />
+							<ns0:channel name="c_dspin_position_3" wire="int_out_position" />
+							<ns0:channel name="r_dspin_position_3" wire="int_in_position" />
+							<ns0:channel name="r_dspin_mot_status_3" wire="int_in_motion_status" />
+							<ns0:channel name="r_dspin_motion_dir_3" wire="digital_in_motion_direction" />
+							<ns0:channel name="r_dspin_switch_event_3" wire="digital_in_switch_event" />
+							<ns0:channel name="r_dspin_switch_flag_3" wire="digital_in_switch_flag" />
+							<ns0:channel name="r_dspin_busy_3" wire="digital_in_busy" />
+							<ns0:channel name="r_dspin_moving_3" wire="digital_in_moving" />
+							<ns0:channel name="c_dspin_run_3" wire="int_out_run" />
+							<ns0:channel name="c_dspin_hard_stop_3" wire="digital_out_hard_stop" />
+							<ns0:channel name="c_dspin_soft_stop_3" wire="digital_out_soft_stop" />
+							<ns0:channel name="c_dspin_reset_pos_3" wire="digital_out_reset_position" />
+							<ns0:channel name="c_dspin_home_3" wire="digital_out_home" />
+							<ns0:channel name="c_dspin_max_speed_3" wire="int_out_max_speed" />
+							<ns0:channel name="c_dspin_min_speed_3" wire="int_out_min_speed" />
+							<ns0:channel name="c_dspin_accel_3" wire="int_out_acceleration" />
+							<ns0:channel name="c_dspin_kval_hold_3" wire="analog_out_kval_hold" />
+							<ns0:channel name="c_dspin_kval_run_3" wire="analog_out_kval_run" />
+							<ns0:channel name="c_dspin_kval_accel_3" wire="analog_out_kval_accel" />
+							<ns0:channel name="c_dspin_kval_decel_3" wire="analog_out_kval_decel" />
+							<ns0:channel name="c_dspin_ocdth_3" wire="int_out_ocdth" />
+							<ns0:channel name="c_dspin_fsspd_3" wire="int_out_fsspd" />
+						</ns0:channels>
+					</ns0:dspin>
+					<ns0:dspin accelDecel="2008" fsSpd="603" kvalAccel="0.115" kvalDecel="0.115" kvalHold="0.115" kvalRun="0.115" maxSpeed="200" minSpeed="99" name="dspin_4" ocdTh="8" type="dspin">
+						<ns0:channels>
+							<ns0:channel name="c_dspin_xfer_4" wire="int_out_xfer" />
+							<ns0:channel name="r_dspin_xfer_4" wire="int_in_xfer" />
+							<ns0:channel name="r_dspin_status_4" wire="int_in_status" />
+							<ns0:channel name="c_dspin_position_4" wire="int_out_position" />
+							<ns0:channel name="r_dspin_position_4" wire="int_in_position" />
+							<ns0:channel name="r_dspin_mot_status_4" wire="int_in_motion_status" />
+							<ns0:channel name="r_dspin_motion_dir_4" wire="digital_in_motion_direction" />
+							<ns0:channel name="r_dspin_switch_event_4" wire="digital_in_switch_event" />
+							<ns0:channel name="r_dspin_switch_flag_4" wire="digital_in_switch_flag" />
+							<ns0:channel name="r_dspin_busy_4" wire="digital_in_busy" />
+							<ns0:channel name="r_dspin_moving_4" wire="digital_in_moving" />
+							<ns0:channel name="c_dspin_run_4" wire="int_out_run" />
+							<ns0:channel name="c_dspin_hard_stop_4" wire="digital_out_hard_stop" />
+							<ns0:channel name="c_dspin_soft_stop_4" wire="digital_out_soft_stop" />
+							<ns0:channel name="c_dspin_reset_pos_4" wire="digital_out_reset_position" />
+							<ns0:channel name="c_dspin_home_4" wire="digital_out_home" />
+							<ns0:channel name="c_dspin_max_speed_4" wire="int_out_max_speed" />
+							<ns0:channel name="c_dspin_min_speed_4" wire="int_out_min_speed" />
+							<ns0:channel name="c_dspin_accel_4" wire="int_out_acceleration" />
+							<ns0:channel name="c_dspin_kval_hold_4" wire="analog_out_kval_hold" />
+							<ns0:channel name="c_dspin_kval_run_4" wire="analog_out_kval_run" />
+							<ns0:channel name="c_dspin_kval_accel_4" wire="analog_out_kval_accel" />
+							<ns0:channel name="c_dspin_kval_decel_4" wire="analog_out_kval_decel" />
+							<ns0:channel name="c_dspin_ocdth_4" wire="int_out_ocdth" />
+							<ns0:channel name="c_dspin_fsspd_4" wire="int_out_fsspd" />
+						</ns0:channels>
+					</ns0:dspin>
+				</ns0:dspins>
+			</ns0:dspinchain>
+			<ns0:tps65217bus address="36" device="/dev/i2c-0" initializedacs="c_initialize_dacs" initializedspins="c_initialize_dspins" ledsafety1="c_led_safety_1" name="tps65217bus1" pollingPeriod="1000" resetadc="c_adc_reset" tempenable="c_temp_enable" temppidsetpoint="c_temppid_setpoint" type="tps65217bus">
+				<ns0:channels>
+					<ns0:channel name="r_ac_power_on" wire="digital_in_1" />
+				</ns0:channels>
+			</ns0:tps65217bus>
+			<ns0:memblock name="stage_temp" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_stage_temp_target" wire="analog_out_1" />
+					<ns0:channel name="c_stage_heat_enabled" wire="digital_out_1" />
+					<ns0:channel name="c_stage_cool_enabled" wire="digital_out_2" />
+					<ns0:channel name="r_stage_temp_actual" scaleC="45" wire="analog_in_1" />
+					<ns0:channel name="r_stage_temp_state" wire="int_in_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="stage_position_1" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_stage_pos_target_1" wire="analog_out_1" />
+					<ns0:channel name="r_stage_pos_actual_1" wire="analog_in_1" />
+					<ns0:channel name="r_stage_pos_moving_1" wire="digital_in_1" />
+					<ns0:channel name="r_stage_pos_maxspeed_1" wire="analog_out_2" />
+					<ns0:channel name="r_stage_pos_accel_1" wire="analog_out_3" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="stage_position_2" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_stage_pos_target_2" wire="analog_out_1" />
+					<ns0:channel name="r_stage_pos_actual_2" wire="analog_in_1" />
+					<ns0:channel name="r_stage_pos_moving_2" wire="digital_in_1" />
+					<ns0:channel name="r_stage_pos_maxspeed_2" wire="analog_out_2" />
+					<ns0:channel name="r_stage_pos_accel_2" wire="analog_out_3" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="stage_position_3" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_stage_pos_target_3" wire="analog_out_1" />
+					<ns0:channel name="r_stage_pos_actual_3" wire="analog_in_1" />
+					<ns0:channel name="r_stage_pos_moving_3" wire="digital_in_1" />
+					<ns0:channel name="r_stage_pos_maxspeed_3" wire="analog_out_2" />
+					<ns0:channel name="r_stage_pos_accel_3" wire="analog_out_3" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="stage_position_4" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_stage_pos_target_4" wire="analog_out_1" />
+					<ns0:channel name="r_stage_pos_actual_4" wire="analog_in_1" />
+					<ns0:channel name="r_stage_pos_moving_4" wire="digital_in_1" />
+					<ns0:channel name="r_stage_pos_maxspeed_4" wire="analog_out_2" />
+					<ns0:channel name="r_stage_pos_accel_4" wire="analog_out_3" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_common" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_trig_source" wire="int_out_1" />
+					<ns0:channel name="r_ext_illum_trig_count" wire="int_in_1" />
+					<ns0:channel name="c_ext_illum_trig_polarity" wire="int_out_2" />
+					<ns0:channel name="c_intl_illum_trig_freq" wire="analog_out_1" />
+					<ns0:channel name="c_intl_illum_trig_polarity" wire="int_out_3" />
+					<ns0:channel name="c_intl_illum_trig_pulse_len" wire="analog_out_2" />
+					<ns0:channel name="c_illum_all_disabled" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_1" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_1" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_1" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_1" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_1" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_1" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_1" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_2" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_2" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_2" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_2" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_2" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_2" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_2" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_3" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_3" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_3" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_3" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_3" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_3" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_3" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_4" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_4" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_4" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_4" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_4" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_4" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_4" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_5" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_5" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_5" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_5" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_5" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_5" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_5" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_6" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_6" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_6" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_6" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_6" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_6" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_6" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_7" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_7" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_7" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_7" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_7" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_7" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_7" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+			<ns0:memblock name="illumination_8" size="5" type="memblock">
+				<ns0:channels>
+					<ns0:channel name="c_illum_pulse_start_8" wire="analog_out_1" />
+					<ns0:channel name="c_illum_pulse_len_8" wire="analog_out_2" />
+					<ns0:channel name="r_illum_intensity_max_8" wire="int_in_1" />
+					<ns0:channel name="r_illum_intensity_min_8" wire="int_in_2" />
+					<ns0:channel name="c_illum_intensity_8" wire="int_out_1" />
+					<ns0:channel name="c_illum_enabled_8" wire="digital_out_1" />
+				</ns0:channels>
+			</ns0:memblock>
+		</ns0:devices>
+	</ns0:interpreter>
+</ns0:system>

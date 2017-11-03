@@ -11,15 +11,25 @@ def main():
     time_now = time.time()
     date_now = str(datetime.date.today())
 
-    call(['cp', '/opt/ht/mk5/config/system.xml', '/opt/ht/mk5/config/system_' + date_now + str(time_now) + '.xml'])
+    call(['cp', '/opt/ht/mk5/config/system.xml',
+          '/opt/ht/mk5/config/system_' + date_now + str(time_now) + '.xml'])
 
     change_element(file_location, "channel",
-                "r_adc1_ain7", "scaleC", new_value)
-
-    print verify_change(file_location, "channel", "r_adc1_ain7", "scaleC", new_value)
-
+                   "r_adc1_ain7", "scaleC", new_value)
+    change_success = verify_change(
+        file_location, "channel", "r_adc1_ain7", "scaleC", new_value)
 
     call(["systemctl", "restart", "mk5.service"])
+
+
+
+    for n in xrange(15):
+        time.sleep(1)
+        sys.stdout.write("#")
+        sys.stdout.flush()
+
+    return change_success
+
 
 if __name__ == "__main__":
     main()

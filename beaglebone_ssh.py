@@ -23,7 +23,8 @@ def main():
         child.sendline(password)
     elif initial_connect == 2:
         pass
-    child.sendline('python /opt/ht/mk5/scripts/change_xml_default.py ' + offset_value)
+    child.sendline(
+        'python /opt/ht/mk5/scripts/change_xml_default.py ' + offset_value)
 
     child.expect([offset_value])
     check_changed = child.expect(
@@ -32,6 +33,7 @@ def main():
         print "Successfully modified XML file"
     elif check_changed == 1:
         print "XML file was not modified"
+
 
 if __name__ == "__main__":
     main()

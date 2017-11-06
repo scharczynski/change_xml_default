@@ -27,18 +27,20 @@ def main():
     child.sendline(
         'python ~/ht_change_offset/change_offset.py ' + offset_value)
 
+    check_changed = child.expect(
+            ['True', 'False', pexpect.TIMEOUT, pexpect.EOF])
+    if check_changed == 0:
+        print "Successfully modified XML file"
+    elif check_changed == 1:
+        print "XML file was not modified"
+
     print "Restarting MK5 service"
     for n in xrange(15):
         time.sleep(1)
         sys.stdout.write("#")
         sys.stdout.flush()
     
-    check_changed = child.expect(
-        ['True', 'False', pexpect.TIMEOUT, pexpect.EOF])
-    if check_changed == 0:
-        print "Successfully modified XML file"
-    elif check_changed == 1:
-        print "XML file was not modified"
+
 
 
 if __name__ == "__main__":

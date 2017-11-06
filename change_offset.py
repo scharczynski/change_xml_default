@@ -21,13 +21,6 @@ def main():
 
     call(["systemctl", "restart", "mk5.service"])
 
-
-    print "Restarting MK5 service"
-    for n in xrange(15):
-        time.sleep(1)
-        sys.stdout.write("#")
-        sys.stdout.flush()
-
     return change_success
 
 

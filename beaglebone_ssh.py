@@ -1,6 +1,7 @@
 import pexpect
 import sys
 import numbers
+import time
 
 
 def main():
@@ -26,6 +27,11 @@ def main():
     child.sendline(
         'python ~/ht_change_offset/change_offset.py ' + offset_value)
 
+    print "Restarting MK5 service"
+    for n in xrange(15):
+        time.sleep(1)
+        sys.stdout.write("#")
+        sys.stdout.flush()
     
     check_changed = child.expect(
         ['True', 'False', pexpect.TIMEOUT, pexpect.EOF])

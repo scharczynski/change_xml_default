@@ -26,7 +26,7 @@ def main():
     child.sendline(
         'python ~/ht_change_offset/change_offset.py ' + offset_value)
 
-    child.expect([offset_value])
+    
     check_changed = child.expect(
         ['True', 'False', pexpect.TIMEOUT, pexpect.EOF])
     if check_changed == 0:

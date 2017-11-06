@@ -16,14 +16,10 @@ def main():
 
     change_element(file_location, "channel",
                    "r_adc1_ain7", "scaleC", new_value)
-    change_success = verify_change(
+    print verify_change(
         file_location, "channel", "r_adc1_ain7", "scaleC", new_value)
 
-    print change_success
-
     call(["systemctl", "restart", "mk5.service"])
-
-    return change_success
 
 
 if __name__ == "__main__":

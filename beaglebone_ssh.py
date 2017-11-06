@@ -24,7 +24,7 @@ def main():
     elif initial_connect == 2:
         pass
     child.sendline(
-        'python ~/change_xml_defaults/change_offset.py ' + offset_value)
+        'python ~/ht_change_offset/change_offset.py ' + offset_value)
 
     child.expect([offset_value])
     check_changed = child.expect(

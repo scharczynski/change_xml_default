@@ -33,8 +33,9 @@ def increment_element(file, tag, wire_name, attr_name, value, output_file=file):
     m = re.match('\{.*\}', root.tag).group(0)
     find_string = ".//" + m + tag + "[@name='" + wire_name + "']"
     node = root.findall(find_string)[0]
-    old_val = node.get(attr_name, default=0)
-    node.set(attr_name, str(value + old_val))
+    old_val = node.get(attr_name, default=0) 
+    new_val = old_val + value
+    node.set(attr_name, str(new_val))
 
     e.write(file, encoding="iso-8859-1", xml_declaration=True)
 
